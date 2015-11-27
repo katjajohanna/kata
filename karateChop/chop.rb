@@ -1,14 +1,16 @@
-def chop(lost_int, list)
+require 'benchmark'
+
+def chop(lost_int, list, offset = 0)
     length = list.length
-    first_half = list[0..length / 2 - 1]
 
-    return list.index(lost_int) if first_half.include? lost_int
+    if length <= 1
+        return list.index(lost_int) + offset if list.include? lost_int
+        return -1
+    end
 
-    second_half = list[length / 2..length]
-
-    return list.index(lost_int) if second_half.include? lost_int
-
-    -1
+    half_length = length / 2
+    return list.index(lost_int) + offset if list[0..half_length - 1].include? lost_int
+    return chop(lost_int, list[half_length..length], offset + half_length)
 end
 
 describe "Searching int from list" do
@@ -47,6 +49,27 @@ describe "Searching int from list" do
             it "Does not find #{lost_int} in #{list}" do
                 expect(chop(lost_int, list)).to eq(-1)
             end
+        end
+    end
+
+    context "Takes less time than search from whole list" do
+        it "Takes less time" do
+            long_list = []
+            for i in 1..10_000_000
+                long_list << i
+            end
+
+            lost_int = 8_803_030
+
+            chop_time = Benchmark.measure {
+                chop(lost_int, long_list)
+            }
+
+            list_time = Benchmark.measure {
+                long_list.include? lost_int
+            }
+
+            expect(chop_time.to_a()[5]).to be < list_time.to_a()[5]
         end
     end
 end
