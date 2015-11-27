@@ -1,4 +1,4 @@
-# Karate chop
+# Karate Chop
 
 Implementing this: http://codekata.com/kata/kata02-karate-chop/ Copy from the page:
 
