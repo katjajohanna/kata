@@ -12,13 +12,4 @@ chop lost_int list = chop' lost_int list list
 
 position = chop 1 [2, 3, 1]
 
-chop2 _ [] = False
-chop2 lost_int [x] = if lost_int == x then True else False
-chop2 lost_int xs = if lost_int `elem` first_half then True else chop2 lost_int second_half
-    where
-        first_half = take ((length xs) `quot` 2) xs
-        second_half = drop ((length xs) `quot` 2) xs
-
-position2 = chop2 1 [2, 3, 1]
-
 main = print position
