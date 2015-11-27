@@ -1,7 +1,6 @@
 # Karate chop
 
-Implementing this: http://codekata.com/kata/kata02-karate-chop/
-Copy from the page:
+Implementing this: http://codekata.com/kata/kata02-karate-chop/ Copy from the page:
 
 A binary chop (sometimes called the more prosaic binary search) finds the position of value in a sorted array of values. It achieves some efficiency by halving the number of items under consideration each time it probes the values: in the first pass it determines whether the required value is in the top or the bottom half of the list of values. In the second pass in considers only this half, again dividing it in to two. It stops when it finds the value it is looking for, or when it runs out of array to search. Binary searches are a favorite of CS lecturers.
 
@@ -29,6 +28,7 @@ You can assume that the array has less than 100,000 elements. For the purposes o
 
 Here is the Test::Unit code I used when developing my methods. Feel free to add to it. The tests assume that array indices start at zero. You’ll probably have to do a couple of global search-and-replaces to make this compile in your language of choice (unless your enlightened choice happens to be Ruby).
 
+```
 def test_chop
   assert_equal(-1, chop(3, []))
   assert_equal(-1, chop(3, [1]))
@@ -52,3 +52,4 @@ def test_chop
   assert_equal(-1, chop(6, [1, 3, 5, 7]))
   assert_equal(-1, chop(8, [1, 3, 5, 7]))
 end
+```
